@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="nxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B86B45"/>
+      <stop offset="100%" stop-color="#C7A45A"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <!-- Rounded Base -->
+  <rect width="64" height="64" rx="14" fill="#111315" stroke="url(#nxGrad)" stroke-width="2"/>
+  <!-- Inner Metallic Badge -->
+  <rect x="6" y="6" width="52" height="52" rx="10" fill="url(#nxGrad)" filter="url(#glow)"/>
+  <!-- Monogram NX -->
+  <text x="32" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Outfit', sans-serif" font-size="28" font-weight="900" fill="#111315" text-anchor="middle" letter-spacing="-1">NX</text>
+</svg>

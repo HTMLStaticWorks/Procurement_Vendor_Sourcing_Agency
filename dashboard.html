@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal Dashboard — Nexolve Technologies | Procurement Intelligence</title>
+  <meta name="description" content="Institutional client procurement dashboard for managing RFQs, quote comparisons, purchase orders, supplier scorecards, contracts, and spend analytics.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="dashboard-sidebar" id="dashboardSidebar">
+      <div class="sidebar-brand">
+        <a href="index.html" class="brand-lockup">
+          <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false" class="matrix-mark brand-lockup__mark" style="width:28px; height:28px;">
+            <g fill="none">
+              <circle class="matrix-mark__ring matrix-mark__ring--outer" cx="48" cy="48" r="38" stroke-width="8" stroke-dasharray="3 10.264"></circle>
+              <circle class="matrix-mark__ring matrix-mark__ring--middle" cx="48" cy="48" r="27" stroke-width="6" stroke-dasharray="2.5 8.81"></circle>
+              <circle class="matrix-mark__ring matrix-mark__ring--inner" cx="48" cy="48" r="17" stroke-width="4" stroke-dasharray="2 6.901"></circle>
+            </g>
+            <circle class="matrix-mark__core" cx="48" cy="48" r="5"></circle>
+          </svg>
+          <span class="brand-lockup__rule" aria-hidden="true"></span>
+          <div class="brand-lockup__type">
+            <span class="brand-lockup__name" style="font-size:1rem;">NEXOLVE</span>
+            <span class="brand-lockup__descriptor" style="font-size:0.5rem; letter-spacing:0.18em;">PORTAL</span>
+          </div>
+        </a>
+        <span class="portal-tag">ENTERPRISE</span>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="sidebar-heading">CLIENT PORTAL</div>
+
+        <div class="sidebar-item active" data-view="overview">
+          <span class="sidebar-icon">📊</span>
+          <span class="sidebar-name">Overview</span>
+        </div>
+
+        <div class="sidebar-item" data-view="sourcing-requests">
+          <span class="sidebar-icon">📝</span>
+          <span class="sidebar-name">Sourcing Requests</span>
+          <span class="sidebar-badge">+New</span>
+        </div>
+
+        <div class="sidebar-item" data-view="active-rfqs">
+          <span class="sidebar-icon">📑</span>
+          <span class="sidebar-name">Active RFQs</span>
+          <span class="sidebar-badge">08</span>
+        </div>
+
+        <div class="sidebar-item" data-view="quote-comparison">
+          <span class="sidebar-icon">⚖️</span>
+          <span class="sidebar-name">Quote Comparison</span>
+          <span class="sidebar-badge" style="background:var(--color-copper-surface); color:var(--color-copper-hover);">24</span>
+        </div>
+
+        <div class="sidebar-item" data-view="purchase-orders">
+          <span class="sidebar-icon">📦</span>
+          <span class="sidebar-name">Purchase Orders</span>
+          <span class="sidebar-badge">16</span>
+        </div>
+
+        <div class="sidebar-item" data-view="suppliers">
+          <span class="sidebar-icon">🏭</span>
+          <span class="sidebar-name">Suppliers</span>
+        </div>
+
+        <div class="sidebar-item" data-view="contracts">
+          <span class="sidebar-icon">📂</span>
+          <span class="sidebar-name">Contracts & Documents</span>
+        </div>
+
+        <div class="sidebar-item" data-view="spend-analytics">
+          <span class="sidebar-icon">📈</span>
+          <span class="sidebar-name">Spend Analytics</span>
+        </div>
+
+        <div class="sidebar-heading" style="margin-top:16px;">WORKSPACE</div>
+
+        <div class="sidebar-item" data-view="notifications">
+          <span class="sidebar-icon">🔔</span>
+          <span class="sidebar-name">Notifications</span>
+          <span class="sidebar-badge" style="background:var(--color-gold-surface); color:var(--color-gold);">3</span>
+        </div>
+
+        <div class="sidebar-item" data-view="profile">
+          <span class="sidebar-icon">⚙️</span>
+          <span class="sidebar-name">Profile & Settings</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar">MS</div>
+          <div class="user-info">
+            <span class="user-name">Marcus Sterling</span>
+            <span class="user-role">Head of Procurement</span>
+          </div>
+        </div>
+        <a href="login.html" class="btn btn-outline btn-sm" style="width:100%; font-size:0.8rem;">Log Out</a>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main class="dashboard-main">
+      <!-- Topbar Header -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Dashboard Navigation">☰</button>
+          <div class="dashboard-breadcrumb">
+            CLIENT PORTAL / <span id="currentViewBreadcrumb">Overview</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="header-control-btn rtl-toggle-btn" id="rtlToggleBtn" aria-label="Toggle RTL / LTR layout" title="Toggle RTL Direction">
+            <svg class="rtl-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 8h14M15 4l4 4-4 4M19 16H5M9 12l-4 4 4 4"/>
+            </svg>
+            <span class="rtl-label">RTL</span>
+          </button>
+          <button class="header-control-btn theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Light / Dark mode">
+            <span class="theme-toggle-icon">🌙</span>
+          </button>
+          <button class="btn btn-primary btn-sm open-rfq-modal">
+            <span>+</span> Create Sourcing RFQ
+          </button>
+          <button class="action-btn-icon" onclick="switchViewTo('notifications')" title="Notifications">
+            🔔
+            <span class="notification-dot"></span>
+          </button>
+          <a href="index.html" class="btn btn-secondary btn-sm" title="Back to Public Site">
+            Public Website ↗
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Body Content -->
+      <div class="dashboard-content">
+        
+        <!-- ==========================================
+             VIEW 1: OVERVIEW (Default Signature Hub)
+             ========================================== -->
+        <div class="dashboard-view-panel active-view" id="view-overview">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">GOOD MORNING, MARCUS</div>
+              <h1 class="dashboard-title">Procurement Overview</h1>
+            </div>
+            <div class="mono text-muted" style="font-size:0.82rem;">
+              CYCLE: Q3-2026 • STATUS: OPTIMIZED
+            </div>
+          </div>
+
+          <!-- 3 Signature Stat Cards (Equal Heights) -->
+          <div class="stat-cards-grid">
+            <div class="stat-card">
+              <div>
+                <div class="stat-card-title">ACTIVE RFQs</div>
+                <div class="stat-card-num text-gold" id="overviewRfqCount">08</div>
+              </div>
+              <div style="margin-top:10px; font-size:0.8rem; color:var(--text-secondary);">
+                4 awaiting quote comparison review
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-card-title">QUOTES RECEIVED</div>
+                <div class="stat-card-num text-copper-bright">24</div>
+              </div>
+              <div style="margin-top:10px; font-size:0.8rem; color:var(--text-secondary);">
+                +6 competitive quotes logged this week
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div>
+                <div class="stat-card-title">PO STATUS</div>
+                <div class="stat-card-num text-white">16</div>
+              </div>
+              <div style="margin-top:10px; font-size:0.8rem; color:var(--text-secondary);">
+                12 in transit • 4 customs clearance
+              </div>
+            </div>
+          </div>
+
+          <!-- Estimated Procurement Savings Banner -->
+          <div class="savings-banner-card">
+            <div class="savings-banner-info">
+              <div class="savings-banner-label">ESTIMATED PROCUREMENT SAVINGS</div>
+              <div class="savings-banner-value text-gold">$248,600</div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width: 82%;"></div>
+              </div>
+              <div class="progress-bar-meta">
+                <span>Optimized Spend Ratio</span>
+                <span class="mono text-gold" style="font-weight:700;">82% OF TARGET GOAL ACHIEVED</span>
+              </div>
+            </div>
+
+            <div style="flex-shrink:0;">
+              <button class="btn btn-gold btn-sm" onclick="switchViewTo('spend-analytics')">View Spend Breakdown →</button>
+            </div>
+          </div>
+
+          <!-- Split: Supplier Performance & Recent Sourcing Requests -->
+          <div class="overview-split-grid">
+            <!-- Left: Supplier Performance Scorecard Preview -->
+            <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; gap:8px;">
+                <h3 style="font-size:1.1rem; color:#FFF;">SUPPLIER PERFORMANCE</h3>
+                <span class="badge badge-copper">Audited A+</span>
+              </div>
+
+              <div class="card-content-body" style="display:flex; flex-direction:column; gap:4px;">
+                <div class="supplier-score-row">
+                  <div>
+                    <strong style="font-size:0.88rem; color:#FFF;">Apex Precision Engineering</strong>
+                    <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Industrial Machining</div>
+                  </div>
+                  <div class="supplier-score-meta">
+                    <div class="supplier-score-bar-bg"><div class="supplier-score-bar-fill" style="width:96%;"></div></div>
+                    <span class="mono text-gold" style="font-weight:700; font-size:0.9rem;">96%</span>
+                  </div>
+                </div>
+
+                <div class="supplier-score-row">
+                  <div>
+                    <strong style="font-size:0.88rem; color:#FFF;">EcoPack Global Solutions</strong>
+                    <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Sustainable Packaging</div>
+                  </div>
+                  <div class="supplier-score-meta">
+                    <div class="supplier-score-bar-bg"><div class="supplier-score-bar-fill" style="width:91%;"></div></div>
+                    <span class="mono text-copper-bright" style="font-weight:700; font-size:0.9rem;">91%</span>
+                  </div>
+                </div>
+
+                <div class="supplier-score-row">
+                  <div>
+                    <strong style="font-size:0.88rem; color:#FFF;">ShieldSafe Protection Gear</strong>
+                    <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Site Safety PPE</div>
+                  </div>
+                  <div class="supplier-score-meta">
+                    <div class="supplier-score-bar-bg"><div class="supplier-score-bar-fill" style="width:87%;"></div></div>
+                    <span class="mono text-white" style="font-weight:700; font-size:0.9rem;">87%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-action-bottom" style="text-align:center;">
+                <button class="btn btn-outline btn-sm" style="width:100%;" onclick="switchViewTo('suppliers')">Full Supplier Radar →</button>
+              </div>
+            </div>
+
+            <!-- Right: Recent Sourcing Requests -->
+            <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; gap:8px;">
+                <h3 style="font-size:1.1rem; color:#FFF;">RECENT SOURCING REQUESTS</h3>
+                <button class="btn btn-secondary btn-sm" onclick="switchViewTo('active-rfqs')">View All (8)</button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>RFQ ID</th>
+                      <th>Category & Title</th>
+                      <th>Status</th>
+                      <th>Quotes</th>
+                      <th>Budget</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentRfqsTableBody">
+                    <!-- Dynamic from JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 2: SOURCING REQUESTS (Creation Hub)
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-sourcing-requests">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">PROCUREMENT SPECIFICATIONS</div>
+              <h1 class="dashboard-title">Create New Sourcing Request</h1>
+            </div>
+          </div>
+
+          <div class="card" style="max-width:900px; padding:clamp(20px, 4vw, 36px);">
+            <p style="color:var(--text-secondary); margin-bottom:28px;">
+              Define your product or service specifications below. Our system will immediately cross-match your parameters against our 1,420+ pre-vetted global supplier database to solicit blind competitive quotes.
+            </p>
+
+            <form onsubmit="handleDirectRFQCreate(event)">
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label">Sourcing Project Title *</label>
+                  <input type="text" id="directRfqTitle" class="form-control" placeholder="e.g. Forged Steel Flanges & CNC Shafts" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Product / Service Category *</label>
+                  <select id="directRfqCategory" class="form-control" required>
+                    <option value="Manufacturing & Industrial Machining">Manufacturing & Industrial Machining</option>
+                    <option value="Packaging & Paperboard Materials">Packaging & Paperboard Materials</option>
+                    <option value="Electronics & PCB Assemblies">Electronics & PCB Assemblies</option>
+                    <option value="Medical Consumables & PPE">Medical Consumables & PPE</option>
+                    <option value="Construction & Structural Steel">Construction & Structural Steel</option>
+                    <option value="Hospitality & FF&E">Hospitality & FF&E</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid-3">
+                <div class="form-group">
+                  <label class="form-label">Quantity / Volume *</label>
+                  <input type="text" id="directRfqQty" class="form-control" placeholder="e.g. 50,000 units" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Target Delivery Date *</label>
+                  <input type="date" id="directRfqDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Delivery Destination Location *</label>
+                  <input type="text" id="directRfqLoc" class="form-control" placeholder="e.g. Rotterdam Port / Chicago Plant" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Estimated Budget Scope (USD) *</label>
+                <input type="number" id="directRfqBudget" class="form-control" placeholder="e.g. 150000" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Upload Technical Specifications & Tolerances</label>
+                <div style="background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.15); border-radius:var(--radius-sm); padding:clamp(16px, 3vw, 24px); text-align:center;">
+                  <div style="font-size:1.4rem; margin-bottom:6px;">📎</div>
+                  <div style="font-weight:600; font-size:0.9rem; color:#FFF;">Drag & Drop BOM, CAD, or Specification PDF</div>
+                  <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Automatic encrypted dispatch to certified suppliers</div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg">Publish Request to Sourcing Desk →</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 3: ACTIVE RFQS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-active-rfqs">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">ACTIVE PROCUREMENT PIPELINE</div>
+              <h1 class="dashboard-title">Active Sourcing RFQs</h1>
+            </div>
+            <div>
+              <button class="btn btn-primary btn-sm open-rfq-modal">+ Create New RFQ</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:16px;">
+              <input type="text" id="rfqSearchInput" class="form-control" placeholder="Search RFQs by ID, title, category..." style="max-width:320px;">
+              <div class="mono text-muted" style="font-size:0.8rem;">Showing all active & reviewing projects</div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>RFQ ID</th>
+                    <th>Project Description</th>
+                    <th>Quantity</th>
+                    <th>Budget Scope</th>
+                    <th>Target Date</th>
+                    <th>Status</th>
+                    <th>Quotes</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allRfqsTableBody">
+                  <!-- Dynamic from JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 4: QUOTE COMPARISON (Signature Interactive Tool)
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-quote-comparison">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">MULTI-VENDOR BID ANALYSIS</div>
+              <h1 class="dashboard-title">Quote Comparison Matrix</h1>
+            </div>
+            <div class="mono text-gold" style="font-size:0.82rem;">
+              PROJECT: RFQ-2048 (Industrial Bearings)
+            </div>
+          </div>
+
+          <div class="quote-matrix-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; gap:12px; flex-wrap:wrap;">
+              <div>
+                <h3 style="font-size:1.15rem; color:#FFF;">Comparative Supplier Scoring Matrix</h3>
+                <p style="font-size:0.85rem; color:var(--text-secondary);">
+                  Algorithmic composite ranking based on Unit Price (35%), MOQ (15%), Lead Time (20%), Payment Terms (10%), and ISO Quality Audit (20%).
+                </p>
+              </div>
+              <span class="badge badge-gold">OPTIMIZED BID IDENTIFIED</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="quote-matrix-table">
+                <thead>
+                  <tr>
+                    <th>Supplier / Accreditation</th>
+                    <th>Unit Price</th>
+                    <th>MOQ</th>
+                    <th>Lead Time</th>
+                    <th>Payment Terms</th>
+                    <th>Quality Score</th>
+                    <th>Composite Score</th>
+                    <th>Decision</th>
+                  </tr>
+                </thead>
+                <tbody id="quoteMatrixBody">
+                  <!-- Dynamic from JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div style="margin-top:24px; padding:16px; background:rgba(199, 164, 90, 0.08); border:1px solid var(--border-gold); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+              <div>
+                <strong style="color:#FFF;">Nexolve Procurement Recommendation:</strong>
+                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                  Apex Precision Engineering yields a <strong>14.2% unit price advantage</strong> with Tier-1 automotive pedigree and Net 45 liquidity flexibility.
+                </div>
+              </div>
+              <button class="btn btn-gold btn-sm" onclick="awardSupplierQuote('Apex Precision Engineering')">
+                Award Master PO to Apex →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 5: PURCHASE ORDERS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-purchase-orders">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">LOGISTICS & ORDER FULFILLMENT</div>
+              <h1 class="dashboard-title">Purchase Orders (PO Status)</h1>
+            </div>
+          </div>
+
+          <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>PO Number</th>
+                    <th>Contracted Supplier</th>
+                    <th>Order Value</th>
+                    <th>Delivery Progress</th>
+                    <th>Delivery Status</th>
+                    <th>Payment Status</th>
+                    <th>ETA</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="purchaseOrdersBody">
+                  <!-- Dynamic from JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 6: SUPPLIER PERFORMANCE
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-suppliers">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">CONTINUOUS AUDITING & METRICS</div>
+              <h1 class="dashboard-title">Supplier Performance Scorecards</h1>
+            </div>
+          </div>
+
+          <div id="supplierPerformanceList">
+            <!-- Dynamic from JS -->
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 7: CONTRACTS & DOCUMENTS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-contracts">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">SECURE DOCUMENT VAULT</div>
+              <h1 class="dashboard-title">Contracts, Quotations & Invoices</h1>
+            </div>
+          </div>
+
+          <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Document Reference</th>
+                    <th>Classification</th>
+                    <th>File Size</th>
+                    <th>Executed Date</th>
+                    <th>Verification</th>
+                    <th>Download</th>
+                  </tr>
+                </thead>
+                <tbody id="documentsTableBody">
+                  <!-- Dynamic from JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 8: SPEND ANALYTICS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-spend-analytics">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">ERP FINANCIAL METRICS</div>
+              <h1 class="dashboard-title">Spend Analytics & Savings Realization</h1>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-bottom:28px;">
+            <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+              <h3 style="font-size:1.1rem; color:#FFF; margin-bottom:16px;">Monthly Sourced Spend vs Achieved Savings</h3>
+              <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-family:var(--font-mono); font-size:0.75rem; gap:8px; flex-wrap:wrap;">
+                <span style="color:#66717A;">■ Sourced Spend ($k)</span>
+                <span style="color:var(--color-gold);">■ Verified Savings ($k)</span>
+              </div>
+              <div id="spendMonthlyChart" style="display:flex; align-items:flex-end; gap:clamp(8px, 2vw, 16px); height:180px; padding-top:20px; width:100%;">
+                <!-- Rendered dynamically from JS -->
+              </div>
+            </div>
+
+            <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
+              <h3 style="font-size:1.1rem; color:#FFF; margin-bottom:16px;">Category Spend Distribution</h3>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
+                    <span>Precision Machining & Metals</span>
+                    <strong class="mono text-white">$920,000 (37%)</strong>
+                  </div>
+                  <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:37%;"></div></div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
+                    <span>Sustainable Packaging & Corrugated</span>
+                    <strong class="mono text-white">$640,000 (26%)</strong>
+                  </div>
+                  <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:26%; background:var(--color-gold);"></div></div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
+                    <span>Industrial PPE & Safety Supplies</span>
+                    <strong class="mono text-white">$450,000 (18%)</strong>
+                  </div>
+                  <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:18%;"></div></div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
+                    <span>Logistics & Freight Services</span>
+                    <strong class="mono text-white">$476,000 (19%)</strong>
+                  </div>
+                  <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:19%; background:var(--color-steel-light);"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 9: NOTIFICATIONS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-notifications">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">REAL-TIME ALERTS</div>
+              <h1 class="dashboard-title">Procurement Notifications</h1>
+            </div>
+          </div>
+
+          <div class="card" style="padding:clamp(16px, 2.5vw, 24px); max-width:800px;">
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="padding:16px; background:rgba(184, 107, 69, 0.1); border-left:3px solid var(--color-copper); border-radius:var(--radius-xs);">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
+                  <strong style="color:#FFF;">New Quotes Available (RFQ-2048)</strong>
+                  <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">10 mins ago</span>
+                </div>
+                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                  Apex Precision Engineering submitted a revised quote with a unit cost of $4.12.
+                </div>
+              </div>
+
+              <div style="padding:16px; background:rgba(199, 164, 90, 0.1); border-left:3px solid var(--color-gold); border-radius:var(--radius-xs);">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
+                  <strong style="color:#FFF;">PO-8891 Customs Clearance Approved</strong>
+                  <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">2 hours ago</span>
+                </div>
+                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                  Shipment cleared Rotterdam customs. Expected warehouse delivery by Sept 22.
+                </div>
+              </div>
+
+              <div style="padding:16px; background:rgba(255,255,255,0.03); border-left:3px solid var(--color-steel); border-radius:var(--radius-xs);">
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
+                  <strong style="color:#FFF;">Annual ISO 14001 Audit Completed</strong>
+                  <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">Yesterday</span>
+                </div>
+                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                  EcoPack Global Solutions renewed ISO certification with 100% compliance.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW 10: PROFILE & SETTINGS
+             ========================================== -->
+        <div class="dashboard-view-panel" id="view-profile">
+          <div class="dashboard-header">
+            <div>
+              <div class="dashboard-greeting">USER ACCOUNT</div>
+              <h1 class="dashboard-title">Profile & Enterprise Settings</h1>
+            </div>
+          </div>
+
+          <div class="card" style="padding:clamp(20px, 3.5vw, 32px); max-width:800px;">
+            <div class="grid-2" style="margin-bottom:24px;">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="Marcus Sterling">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Title / Role</label>
+                <input type="text" class="form-control" value="Head of Global Procurement">
+              </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:24px;">
+              <div class="form-group">
+                <label class="form-label">Corporate Email</label>
+                <input type="email" class="form-control" value="m.sterling@enterprise-corp.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Currency Benchmark</label>
+                <select class="form-control">
+                  <option selected>USD ($)</option>
+                  <option>EUR (€)</option>
+                  <option>GBP (£)</option>
+                  <option>SGD (S$)</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="showToast('Profile preferences updated.', 'success')">Save Changes</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Sourcing RFQ Creation Modal -->
+  <div class="modal-backdrop" id="rfqCreateModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; gap:8px;">
+        <h3 style="font-size:1.25rem; color:#FFF;">Publish New Sourcing RFQ</h3>
+        <button id="closeRfqModalBtn" style="color:var(--text-muted); font-size:1.2rem; cursor:pointer;" aria-label="Close Modal">✕</button>
+      </div>
+
+      <form id="newRfqForm">
+        <div class="form-group">
+          <label class="form-label">Project Title *</label>
+          <input type="text" id="rfqTitleInput" class="form-control" placeholder="e.g. Hydraulic Actuators & Valves" required>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select id="rfqCategoryInput" class="form-control" required>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Packaging">Packaging</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Construction">Construction</option>
+              <option value="Hospitality">Hospitality</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Quantity *</label>
+            <input type="text" id="rfqQuantityInput" class="form-control" placeholder="e.g. 20,000 units" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Budget Scope (USD) *</label>
+            <input type="number" id="rfqBudgetInput" class="form-control" placeholder="e.g. 75000" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Target Delivery Date</label>
+            <input type="date" id="rfqDateInput" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Destination Location</label>
+          <input type="text" id="rfqLocationInput" class="form-control" placeholder="e.g. Frankfurt, Germany">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('rfqCreateModal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Publish RFQ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    function handleDirectRFQCreate(e) {
+      e.preventDefault();
+      const title = document.getElementById('directRfqTitle').value;
+      const cat = document.getElementById('directRfqCategory').value;
+      const qty = document.getElementById('directRfqQty').value;
+      const budget = document.getElementById('directRfqBudget').value;
+      const date = document.getElementById('directRfqDate').value || '2026-11-15';
+      const loc = document.getElementById('directRfqLoc').value;
+
+      const newId = `RFQ-${2049 + DashboardState.rfqs.length - 6}`;
+      DashboardState.rfqs.unshift({
+        id: newId,
+        title,
+        category: cat,
+        quantity: qty,
+        location: loc,
+        targetDate: date,
+        status: 'Active',
+        quotesReceived: 0,
+        budget: `$${parseInt(budget || '50000', 10).toLocaleString()}`
+      });
+      DashboardState.activeRFQsCount++;
+      
+      renderOverviewModule();
+      renderActiveRFQsModule();
+      switchViewTo('active-rfqs');
+
+      if (window.showToast) {
+        window.showToast(`Sourcing Request ${newId} published! Matching suppliers dispatched.`, 'success');
+      }
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
