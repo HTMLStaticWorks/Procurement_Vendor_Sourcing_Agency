@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMetricCounters();
   initTabFilters();
   initToasts();
+  initScrollToTop();
   initHomeHeroInteractive();
   initSupplierRadarHUD();
   initAboutHeroInteractive();
@@ -193,9 +194,9 @@ function showToast(message, type = 'success') {
   }
 
   const toast = document.createElement('div');
-  toast.className = 'toast';
+  toast.className = `toast toast-${type}`;
   const icon = type === 'success' ? '✓' : 'ℹ';
-  toast.innerHTML = `<span style="color:var(--color-copper); font-weight:bold;">${icon}</span> <span>${message}</span>`;
+  toast.innerHTML = `<span class="toast-icon" style="color:var(--color-copper); font-weight:bold; font-size:1.1rem;">${icon}</span> <span style="font-weight:500;">${message}</span>`;
 
   container.appendChild(toast);
 
@@ -209,6 +210,34 @@ function showToast(message, type = 'success') {
 
 function initToasts() {
   window.showToast = showToast;
+}
+
+/* Move to Top Floating Button Handler */
+function initScrollToTop() {
+  let btn = document.querySelector('.scroll-top-btn');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.className = 'scroll-top-btn';
+    btn.setAttribute('aria-label', 'Scroll back to top');
+    btn.setAttribute('title', 'Scroll to top');
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>`;
+    document.body.appendChild(btn);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 320) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 }
 
 /* ==========================================================================

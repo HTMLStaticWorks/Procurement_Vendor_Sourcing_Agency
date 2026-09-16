@@ -15,8 +15,8 @@
     <!-- Sidebar Navigation -->
     <aside class="dashboard-sidebar" id="dashboardSidebar">
       <div class="sidebar-brand">
-        <a href="index.html" class="brand-lockup">
-          <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false" class="matrix-mark brand-lockup__mark" style="width:28px; height:28px;">
+        <a href="index.html" class="brand-lockup" aria-label="Nexolve Technologies Home">
+          <svg viewBox="0 0 96 96" aria-hidden="true" focusable="false" class="matrix-mark brand-lockup__mark">
             <g fill="none">
               <circle class="matrix-mark__ring matrix-mark__ring--outer" cx="48" cy="48" r="38" stroke-width="8" stroke-dasharray="3 10.264"></circle>
               <circle class="matrix-mark__ring matrix-mark__ring--middle" cx="48" cy="48" r="27" stroke-width="6" stroke-dasharray="2.5 8.81"></circle>
@@ -26,11 +26,10 @@
           </svg>
           <span class="brand-lockup__rule" aria-hidden="true"></span>
           <div class="brand-lockup__type">
-            <span class="brand-lockup__name" style="font-size:1rem;">NEXOLVE</span>
-            <span class="brand-lockup__descriptor" style="font-size:0.5rem; letter-spacing:0.18em;">PORTAL</span>
+            <span class="brand-lockup__name">NEXOLVE</span>
+            <span class="brand-lockup__descriptor">TECHNOLOGIES</span>
           </div>
         </a>
-        <span class="portal-tag">ENTERPRISE</span>
       </div>
 
       <div class="sidebar-menu">
@@ -102,18 +101,20 @@
             <span class="user-role">Head of Procurement</span>
           </div>
         </div>
-        <a href="login.html" class="btn btn-outline btn-sm" style="width:100%; font-size:0.8rem;">Log Out</a>
+        <a href="index.html" class="btn btn-outline btn-sm" style="width:100%; font-size:0.8rem;">Log Out</a>
       </div>
     </aside>
 
     <!-- Main Workspace Area -->
     <main class="dashboard-main">
-      <!-- Topbar Header -->
+      <!-- Topbar Header (Fixed / Sticky) -->
       <header class="dashboard-topbar">
         <div class="topbar-left">
           <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Dashboard Navigation">☰</button>
           <div class="dashboard-breadcrumb">
-            CLIENT PORTAL / <span id="currentViewBreadcrumb">Overview</span>
+            <a href="index.html" class="topbar-brand-name">NEXOLVE TECHNOLOGIES</a>
+            <span class="breadcrumb-separator">/</span>
+            <span id="currentViewBreadcrumb">Overview</span>
           </div>
         </div>
 
@@ -214,14 +215,14 @@
             <!-- Left: Supplier Performance Scorecard Preview -->
             <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; gap:8px;">
-                <h3 style="font-size:1.1rem; color:#FFF;">SUPPLIER PERFORMANCE</h3>
+                <h3 style="font-size:1.1rem;">SUPPLIER PERFORMANCE</h3>
                 <span class="badge badge-copper">Audited A+</span>
               </div>
 
               <div class="card-content-body" style="display:flex; flex-direction:column; gap:4px;">
                 <div class="supplier-score-row">
                   <div>
-                    <strong style="font-size:0.88rem; color:#FFF;">Apex Precision Engineering</strong>
+                    <strong style="font-size:0.88rem;">Apex Precision Engineering</strong>
                     <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Industrial Machining</div>
                   </div>
                   <div class="supplier-score-meta">
@@ -232,7 +233,7 @@
 
                 <div class="supplier-score-row">
                   <div>
-                    <strong style="font-size:0.88rem; color:#FFF;">EcoPack Global Solutions</strong>
+                    <strong style="font-size:0.88rem;">EcoPack Global Solutions</strong>
                     <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Sustainable Packaging</div>
                   </div>
                   <div class="supplier-score-meta">
@@ -243,12 +244,12 @@
 
                 <div class="supplier-score-row">
                   <div>
-                    <strong style="font-size:0.88rem; color:#FFF;">ShieldSafe Protection Gear</strong>
+                    <strong style="font-size:0.88rem;">ShieldSafe Protection Gear</strong>
                     <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Site Safety PPE</div>
                   </div>
                   <div class="supplier-score-meta">
                     <div class="supplier-score-bar-bg"><div class="supplier-score-bar-fill" style="width:87%;"></div></div>
-                    <span class="mono text-white" style="font-weight:700; font-size:0.9rem;">87%</span>
+                    <span class="mono text-steel" style="font-weight:700; font-size:0.9rem;">87%</span>
                   </div>
                 </div>
               </div>
@@ -261,7 +262,7 @@
             <!-- Right: Recent Sourcing Requests -->
             <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; gap:8px;">
-                <h3 style="font-size:1.1rem; color:#FFF;">RECENT SOURCING REQUESTS</h3>
+                <h3 style="font-size:1.1rem;">RECENT SOURCING REQUESTS</h3>
                 <button class="btn btn-secondary btn-sm" onclick="switchViewTo('active-rfqs')">View All (8)</button>
               </div>
 
@@ -343,14 +344,14 @@
 
               <div class="form-group">
                 <label class="form-label">Upload Technical Specifications & Tolerances</label>
-                <div style="background:rgba(255,255,255,0.02); border:1px dashed rgba(255,255,255,0.15); border-radius:var(--radius-sm); padding:clamp(16px, 3vw, 24px); text-align:center;">
+                <div class="form-file-dropzone" style="margin-bottom:0;">
                   <div style="font-size:1.4rem; margin-bottom:6px;">📎</div>
-                  <div style="font-weight:600; font-size:0.9rem; color:#FFF;">Drag & Drop BOM, CAD, or Specification PDF</div>
-                  <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">Automatic encrypted dispatch to certified suppliers</div>
+                  <div class="form-file-title">Drag & Drop BOM, CAD, or Specification PDF</div>
+                  <div class="form-file-sub">Automatic encrypted dispatch to certified suppliers</div>
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-lg">Publish Request to Sourcing Desk →</button>
+              <button type="submit" class="btn btn-primary btn-lg" style="margin-top:20px;">Publish Request to Sourcing Desk →</button>
             </form>
           </div>
         </div>
@@ -414,7 +415,7 @@
           <div class="quote-matrix-card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; gap:12px; flex-wrap:wrap;">
               <div>
-                <h3 style="font-size:1.15rem; color:#FFF;">Comparative Supplier Scoring Matrix</h3>
+                <h3 style="font-size:1.15rem;">Comparative Supplier Scoring Matrix</h3>
                 <p style="font-size:0.85rem; color:var(--text-secondary);">
                   Algorithmic composite ranking based on Unit Price (35%), MOQ (15%), Lead Time (20%), Payment Terms (10%), and ISO Quality Audit (20%).
                 </p>
@@ -442,9 +443,9 @@
               </table>
             </div>
 
-            <div style="margin-top:24px; padding:16px; background:rgba(199, 164, 90, 0.08); border:1px solid var(--border-gold); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div class="recommendation-card-box" style="margin-top:24px; padding:16px; background:rgba(199, 164, 90, 0.08); border:1px solid var(--border-gold); border-radius:var(--radius-sm); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
               <div>
-                <strong style="color:#FFF;">Nexolve Procurement Recommendation:</strong>
+                <strong>Nexolve Procurement Recommendation:</strong>
                 <div style="font-size:0.85rem; color:var(--text-secondary);">
                   Apex Precision Engineering yields a <strong>14.2% unit price advantage</strong> with Tier-1 automotive pedigree and Net 45 liquidity flexibility.
                 </div>
@@ -551,9 +552,9 @@
 
           <div class="grid-2" style="margin-bottom:28px;">
             <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
-              <h3 style="font-size:1.1rem; color:#FFF; margin-bottom:16px;">Monthly Sourced Spend vs Achieved Savings</h3>
+              <h3 style="font-size:1.1rem; margin-bottom:16px;">Monthly Sourced Spend vs Achieved Savings</h3>
               <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-family:var(--font-mono); font-size:0.75rem; gap:8px; flex-wrap:wrap;">
-                <span style="color:#66717A;">■ Sourced Spend ($k)</span>
+                <span style="color:var(--text-muted);">■ Sourced Spend ($k)</span>
                 <span style="color:var(--color-gold);">■ Verified Savings ($k)</span>
               </div>
               <div id="spendMonthlyChart" style="display:flex; align-items:flex-end; gap:clamp(8px, 2vw, 16px); height:180px; padding-top:20px; width:100%;">
@@ -562,12 +563,12 @@
             </div>
 
             <div class="card" style="padding:clamp(16px, 2.5vw, 24px);">
-              <h3 style="font-size:1.1rem; color:#FFF; margin-bottom:16px;">Category Spend Distribution</h3>
+              <h3 style="font-size:1.1rem; margin-bottom:16px;">Category Spend Distribution</h3>
               <div style="display:flex; flex-direction:column; gap:14px;">
                 <div>
                   <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
                     <span>Precision Machining & Metals</span>
-                    <strong class="mono text-white">$920,000 (37%)</strong>
+                    <strong class="mono">$920,000 (37%)</strong>
                   </div>
                   <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:37%;"></div></div>
                 </div>
@@ -575,7 +576,7 @@
                 <div>
                   <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
                     <span>Sustainable Packaging & Corrugated</span>
-                    <strong class="mono text-white">$640,000 (26%)</strong>
+                    <strong class="mono">$640,000 (26%)</strong>
                   </div>
                   <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:26%; background:var(--color-gold);"></div></div>
                 </div>
@@ -583,7 +584,7 @@
                 <div>
                   <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
                     <span>Industrial PPE & Safety Supplies</span>
-                    <strong class="mono text-white">$450,000 (18%)</strong>
+                    <strong class="mono">$450,000 (18%)</strong>
                   </div>
                   <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:18%;"></div></div>
                 </div>
@@ -591,7 +592,7 @@
                 <div>
                   <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px; gap:8px;">
                     <span>Logistics & Freight Services</span>
-                    <strong class="mono text-white">$476,000 (19%)</strong>
+                    <strong class="mono">$476,000 (19%)</strong>
                   </div>
                   <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:19%; background:var(--color-steel-light);"></div></div>
                 </div>
@@ -615,7 +616,7 @@
             <div style="display:flex; flex-direction:column; gap:16px;">
               <div style="padding:16px; background:rgba(184, 107, 69, 0.1); border-left:3px solid var(--color-copper); border-radius:var(--radius-xs);">
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
-                  <strong style="color:#FFF;">New Quotes Available (RFQ-2048)</strong>
+                  <strong>New Quotes Available (RFQ-2048)</strong>
                   <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">10 mins ago</span>
                 </div>
                 <div style="font-size:0.85rem; color:var(--text-secondary);">
@@ -625,7 +626,7 @@
 
               <div style="padding:16px; background:rgba(199, 164, 90, 0.1); border-left:3px solid var(--color-gold); border-radius:var(--radius-xs);">
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
-                  <strong style="color:#FFF;">PO-8891 Customs Clearance Approved</strong>
+                  <strong>PO-8891 Customs Clearance Approved</strong>
                   <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">2 hours ago</span>
                 </div>
                 <div style="font-size:0.85rem; color:var(--text-secondary);">
@@ -635,7 +636,7 @@
 
               <div style="padding:16px; background:rgba(255,255,255,0.03); border-left:3px solid var(--color-steel); border-radius:var(--radius-xs);">
                 <div style="display:flex; justify-content:space-between; margin-bottom:4px; gap:8px; flex-wrap:wrap;">
-                  <strong style="color:#FFF;">Annual ISO 14001 Audit Completed</strong>
+                  <strong>Annual ISO 14001 Audit Completed</strong>
                   <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">Yesterday</span>
                 </div>
                 <div style="font-size:0.85rem; color:var(--text-secondary);">
@@ -697,7 +698,7 @@
   <div class="modal-backdrop" id="rfqCreateModal">
     <div class="modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; gap:8px;">
-        <h3 style="font-size:1.25rem; color:#FFF;">Publish New Sourcing RFQ</h3>
+        <h3 style="font-size:1.25rem;">Publish New Sourcing RFQ</h3>
         <button id="closeRfqModalBtn" style="color:var(--text-muted); font-size:1.2rem; cursor:pointer;" aria-label="Close Modal">✕</button>
       </div>
 

@@ -236,7 +236,7 @@ function renderActiveRFQsModule() {
       <tr>
         <td class="mono text-copper" style="font-weight:700;">${rfq.id}</td>
         <td>
-          <div style="font-weight:600; color:#FFF;">${rfq.title}</div>
+          <div style="font-weight:600;">${rfq.title}</div>
           <div style="font-size:0.75rem; color:var(--text-muted);">${rfq.category} • ${rfq.location}</div>
         </td>
         <td class="mono">${rfq.quantity}</td>
@@ -262,7 +262,7 @@ function renderQuoteComparisonModule() {
     return `
       <tr class="${isWinner ? 'winner' : ''}">
         <td>
-          <div style="font-weight:700; color:#FFFFFF;">${q.supplier}</div>
+          <div style="font-weight:700;">${q.supplier}</div>
           <div style="font-size:0.75rem; color:var(--text-muted);">${q.notes}</div>
         </td>
         <td class="mono text-gold" style="font-weight:700; font-size:1.1rem;">$${q.unitPrice.toFixed(2)}</td>
@@ -304,18 +304,20 @@ function renderPurchaseOrdersModule() {
             <span class="mono" style="font-size:0.75rem;">${po.progress}%</span>
           </div>
         </td>
-        <td><span class="badge badge-copper">${po.deliveryStatus}</span></td>
+        <td>
+          <span class="badge ${po.deliveryStatus === 'Delivered' ? 'badge-active' : 'badge-review'}">${po.deliveryStatus}</span>
+        </td>
         <td class="mono">${po.paymentStatus}</td>
         <td class="mono">${po.eta}</td>
         <td>
-          <button class="btn btn-outline btn-sm" onclick="downloadPODocument('${po.poNumber}')">PDF</button>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Tracking coordinates loaded for ${po.poNumber}', 'info')">Track PO</button>
         </td>
       </tr>
     `;
   }).join('');
 }
 
-/* Module 6: Supplier Performance */
+/* Module 6: Supplier Performance List */
 function renderSupplierPerformanceModule() {
   const container = document.getElementById('supplierPerformanceList');
   if (!container) return;
@@ -325,7 +327,7 @@ function renderSupplierPerformanceModule() {
       <div class="card" style="margin-bottom:16px; padding:20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
           <div>
-            <h4 style="font-size:1.1rem; color:#FFF; margin-bottom:4px;">${s.name}</h4>
+            <h4 style="font-size:1.1rem; margin-bottom:4px;">${s.name}</h4>
             <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">${s.category} • ${s.region}</div>
           </div>
           <div style="text-align:right;">
@@ -378,7 +380,7 @@ function renderSpendAnalyticsModule() {
     return `
       <div style="display:flex; flex-direction:column; align-items:center; gap:8px; flex:1;">
         <div style="display:flex; align-items:flex-end; gap:6px; height:160px;">
-          <div style="width:20px; height:${spendHeight}px; background:#2A3138; border-radius:4px 4px 0 0;" title="Spend: $${spend[i]}k"></div>
+          <div class="spend-bar-bg" style="width:20px; height:${spendHeight}px; border-radius:4px 4px 0 0;" title="Spend: $${spend[i]}k"></div>
           <div style="width:20px; height:${savingsHeight}px; background:linear-gradient(180deg, var(--color-gold), var(--color-copper)); border-radius:4px 4px 0 0;" title="Savings: $${savings[i]}k"></div>
         </div>
         <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">${m}</span>
@@ -396,7 +398,7 @@ function renderContractsModule() {
     return `
       <tr>
         <td>
-          <div style="font-weight:600; color:#FFFFFF;">📄 ${doc.title}</div>
+          <div style="font-weight:600;">📄 ${doc.title}</div>
         </td>
         <td><span class="badge badge-steel">${doc.type}</span></td>
         <td class="mono">${doc.size}</td>
